@@ -1,0 +1,32 @@
+{
+  "name": "festivalmusicasass",
+  "version": "1.0.0",
+  "description": "Aprendiendo Gulp y SASS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscardenas17/musicFestSASS.git"
+  },
+  "keywords": [
+    "SASS",
+    "Gulp",
+    "Web",
+    "design"
+  ],
+  "author": "Oscar Yesid Cárdenas Santos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oscardenas17/musicFestSASS/issues"
+  },
+  "homepage": "https://github.com/oscardenas17/musicFestSASS#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-dart-sass": "^1.0.2"
+  },
+  "dependencies": {
+    "node-sass": "^5.0.0"
+  }
+}
