@@ -21,7 +21,7 @@ function minificarcss(){
 }
 
 function watchArchivos(){
-   watch( 'src/scss/app.scss' , css)
+   watch( 'src/scss/**/*.scss' , css);  // * = la carpeta actual | ** = todos las carpetas con todos los archivos con esa extension
 }
 
 // minificar css
