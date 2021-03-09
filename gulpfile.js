@@ -1,5 +1,6 @@
 const {series, src, dest, watch} = require('gulp');
 const sass = require('gulp-dart-sass');
+const imagemin = require('gulp-imagemin');
 
 //Funcion que compila SASS - series: ejecutar varias funciones - src, ruta archivo sass / dest, donde guardar css compilado / watch complia cambios
 
@@ -20,6 +21,12 @@ function minificarcss(){
         .pipe( dest('./build/css') )
 }
 
+function imagenes(){
+    return src('src/img/**/*')
+    .pipe( imagemin() )
+    .pipe( dest('./build/img'))
+}
+
 function watchArchivos(){
    watch( 'src/scss/**/*.scss' , css);  // * = la carpeta actual | ** = todos las carpetas con todos los archivos con esa extension
 }
@@ -30,4 +37,5 @@ function watchArchivos(){
 //Compilar con:  gulp css
 exports.css = css;
 exports.minificarcss = minificarcss;
+exports.imagenes = imagenes;
 exports.watchArchivos = watchArchivos
