@@ -3,12 +3,14 @@ const sass = require('gulp-dart-sass');
 const imagemin = require('gulp-imagemin');
 const notify = require('gulp-notify');
 const webp = require('gulp-webp');
+const concat = require('gulp-concat');
 
 //Funcion que compila SASS - series: ejecutar varias funciones - src, ruta archivo sass / dest, donde guardar css compilado / watch complia cambios
 
 const paths = {
     imagenes: 'src/img/**/*',
-    scss: 'src/scss/**/*.scss'
+    scss: 'src/scss/**/*.scss',
+    js: 'src/js/**/*.js'
 }
 
 
@@ -31,6 +33,13 @@ function minificarcss(){
         .pipe( dest('./build/css') )
 }
 
+function javascript(){
+    return src(paths.js)
+        .pipe( concat('bundle.js')  )
+        .pipe( dest('./build/js') )
+}
+
+
 function imagenes(){
     return src(paths.imagenes)
     .pipe( imagemin() )
@@ -49,6 +58,7 @@ function versionWebp(){
 function watchArchivos(){
 //    watch( 'src/scss/**/*.scss' , css);  // * = la carpeta actual | ** = todos las carpetas con todos los archivos con esa extension
     watch( paths.scss , css); 
+    watch( paths.js, javascript); 
 }
 
 // minificar css
@@ -60,4 +70,4 @@ exports.minificarcss = minificarcss;
 exports.imagenes = imagenes;
 exports.watchArchivos = watchArchivos
 
-exports.default = series ( css, imagenes,versionWebp, watchArchivos)
+exports.default = series ( css, imagenes, javascript,versionWebp, watchArchivos)
