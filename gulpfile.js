@@ -7,6 +7,14 @@ const concat = require('gulp-concat');
 
 //Funcion que compila SASS - series: ejecutar varias funciones - src, ruta archivo sass / dest, donde guardar css compilado / watch complia cambios
 
+
+
+//UTILIDADES CSS
+const autoprefixer = require('autoprefixer'); //prefijos en css
+const postcss = require('gulp-postcss'); // procesamiento css
+const cssnano = require('cssnano'); // minificar css
+const sourcemaps = require('gulp-sourcemaps');
+
 const paths = {
     imagenes: 'src/img/**/*',
     scss: 'src/scss/**/*.scss',
@@ -16,22 +24,27 @@ const paths = {
 
 function css(){
     // return src('src/scss/app.scss')
+
         return src(paths.scss)
-        .pipe( sass( {
-            outputStyle: 'expanded'
-        }) )
+        .pipe ( sourcemaps.init() ) //identifica ref del archivo original
+        .pipe ( sass() ) // compilar sass
+        // .pipe( sass( {
+        //     outputStyle: 'expanded'
+        // }) ) SIN USO DE CSSNANO
+        .pipe( postcss(  [autoprefixer(), cssnano()]   ))
+        .pipe( sourcemaps.write('.') ) //crea el app.css.map
         .pipe( dest('./build/css') )
    
 }
 
-function minificarcss(){
-    // return src('src/scss/app.scss')
-    return src(paths.scss)
-        .pipe( sass({
-            outputStyle: 'compressed'
-        }    ))
-        .pipe( dest('./build/css') )
-}
+// function minificarcss(){
+//     // return src('src/scss/app.scss')
+//     return src(paths.scss)
+//         .pipe( sass({
+//             outputStyle: 'compressed'
+//         }    ))
+//         .pipe( dest('./build/css') )
+// }
 
 function javascript(){
     return src(paths.js)
@@ -66,7 +79,7 @@ function watchArchivos(){
 
 //Compilar con:  gulp css
 exports.css = css;
-exports.minificarcss = minificarcss;
+// exports.minificarcss = minificarcss;
 exports.imagenes = imagenes;
 exports.watchArchivos = watchArchivos
 
